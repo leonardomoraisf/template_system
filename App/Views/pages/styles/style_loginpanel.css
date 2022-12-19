@@ -1,0 +1,99 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Montserrat', sans-serif;
+}
+
+html,body{
+    background-color: #F6F6F9;
+    height: 100%;
+}
+
+body{
+    overflow-y: hidden;
+}
+
+.sidebar{
+    width: 31%;
+    height: 100%;
+    background-color: #EAEAF4;
+}
+
+.form-container-login{
+    transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    max-width: 1163px;
+}
+
+.form-container-login{
+    display: flex;
+}
+
+.form-login{
+    background-color: white;
+    padding: 30px;
+    max-width: 575px;
+    border: 1px solid #EBEBEB;
+    border-radius: 10px;
+}
+
+.form-login input[type=text],
+.form-login input[type=password]{
+    width: 100%;
+    height: 60px;
+    padding-left: 30px;
+    box-shadow: 0px 3px 1px #D3D8E067;
+    border: 1px solid #EBEBEB;
+    margin-bottom: 17px;
+    border-radius: 10px;
+}
+
+
+.form-login input[type=submit]{
+    margin-top: 17px;
+    width: 100%;
+    height: 60px;
+    color: white;
+    cursor: pointer;
+    background: #444294 0% 0% no-repeat padding-box;
+    box-shadow: 0px 2px 1px #2B2962;
+    border-radius: 10px;
+    font: normal normal bold 17px/23px Montserrat;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+}
+
+.form-login a{
+    margin-top: 17px;
+    border: 2px solid #444294;
+    border-radius: 10px;
+    display: block;
+    width: 100%;
+    height: 60px;
+    padding: 15px 0;
+    text-align: center;
+    text-decoration: none;
+    font: normal normal bold 17px/23px Montserrat;
+    letter-spacing: 0px;
+    color: #444294;
+}
+
+.form-login label{
+    font: normal normal bold 15px/23px Montserrat;
+    margin-right: 5px;
+}
+
+.error-Box{
+    width: 100%;
+    padding: 6px 2%;
+    text-align: center;
+    background: #F75353;
+    font: normal normal bold 17px/23px Montserrat;
+    color: white;
+    font-size: 15px;
+}
+

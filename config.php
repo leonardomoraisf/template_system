@@ -11,5 +11,7 @@
     define('INCLUDE_PATH_STATIC','http://localhost/sistema_portifolio/App/Views/pages/');
     define('INCLUDE_PATH','http://localhost/sistema_portifolio/');
     define('INCLUDE_PATH_PANEL',INCLUDE_PATH.'App/Controllers/PanelController.php');
+
+    define('NOME_EMPRESA','Nome da empresa');
     
 ?>
