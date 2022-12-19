@@ -19,9 +19,11 @@
                         <p><?php echo \App\Models\AllUsersModel::catchPosition($_SESSION['position']); ?></p>
                     </div>
                 </div><!--user-box-->
-                <a href="<?php echo INCLUDE_PATH.'panel'?>">Início</a>
-                <a href="<?php echo INCLUDE_PATH.'registerpanel'?>">Registrar novo usuário</a>
-                <a href="<?php echo INCLUDE_PATH.'updateuserpanel'?>">Atualizar usuário</a>
+                <div class="box-div"><p>Administração usuários</p></div>
+                <a class="register" href="<?php echo INCLUDE_PATH.'registerpanel'?>">Registrar novo usuário</a>
+                <a class="update" href="<?php echo INCLUDE_PATH.'updateuserpanel'?>">Atualizar usuário</a>
+                <div class="box-div"><p>Cadastro</p></div>
+                <a class="reg-depoimentos" href="<?php echo INCLUDE_PATH.'registerdepoimentospanel'?>">Cadastrar depoimentos</a>
             </div>
 
         </div><!--sidebar-wrapper-->
@@ -34,8 +36,11 @@
         <div class="top-menu-btn">
             <i class="fa fa-bars"></i>
         </div>
+        <div class="top-menu-inicio">
+            <a class="inicio" href="<?php echo INCLUDE_PATH.'panel'?>">Início</a>
+        </div>
         <div class="top-menu-logout">
-            <a href="<?php echo INCLUDE_PATH.'panel'?>?logout">Sair<i class="fa fa-arrow-right"></i></a>
+            <a href="<?php echo INCLUDE_PATH.'panel'?>?logoutpanel">Sair<i class="fa fa-arrow-right"></i></a>
         </div><!--logout-->
 
     </div><!--center-->

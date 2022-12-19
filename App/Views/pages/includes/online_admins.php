@@ -5,7 +5,7 @@
 
 <div class="box-content w100">
 
-    <h2><i class="fa fa-rocket"></i>Admins online = <div class="box-count"><span><?php echo count($onlineAdmins); ?></span></div></h2>
+    <h2><i class="fa fa-rocket"></i>Admins online = <div class="box-count"><span><?php echo count($onlineAdmins) ?></span></div></h2>
 
     <div class="table-responsive">
 

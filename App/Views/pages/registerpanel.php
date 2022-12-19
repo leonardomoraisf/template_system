@@ -25,6 +25,7 @@
                 <div class="form-register">
 
                     <form method="post">
+                        <label for="name">Cadastre um novo usuário:</label>
                         <input type="text" name="name" placeholder="Nome Completo">
                         <input type="text" name="user" placeholder="Usuário">
                         <label >Posição :</label>
@@ -38,8 +39,8 @@
                         </select>
                         <input type="password" name="password" placeholder="Senha">
                         <input type="submit" name="action" value="Criar nova conta">
-                        <?php if(isset($_POST['error2'])){ ?>
-                            <p class="error2"><?php echo $_POST['error2'];?></p>
+                        <?php if(isset($_POST['succsess'])){ ?>
+                            <p class="succsess"><?php echo $_POST['succsess'];?></p>
                         <?php } ?>
                         <input type="hidden" name="register" value="register">
                     </form>

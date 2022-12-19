@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Registrar novo usuário</title>
+    <title>Atualizar usuário</title>
     <link href="<?php echo INCLUDE_PATH_STATIC ?>styles/style_updateuserpanel.css" rel="stylesheet" >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -42,8 +42,8 @@
                         </select>
                         <input type="password" name="password" placeholder="Senha">
                         <input type="submit" name="action" value="Atualizar conta">
-                        <?php if(isset($_POST['error2'])){ ?>
-                            <p class="error2"><?php echo $_POST['error2'];?></p>
+                        <?php if(isset($_POST['succsess'])){ ?>
+                            <p class="succsess"><?php echo $_POST['succsess'];?></p>
                         <?php } ?>
                         <input type="hidden" name="update" value="update">
                     </form>

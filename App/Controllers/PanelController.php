@@ -8,14 +8,11 @@
     {
         public function index(){
 
-            if(isset($_GET['logout'])){
-                session_unset();
-                session_destroy();
-
-                \App\Utilities::redirect(INCLUDE_PATH.'panel');
+            if(isset($_GET['logoutpanel'])){
+                \App\Models\AdminsModel::logoutPanel();
             }
 
-            if(isset($_SESSION['login'])){
+            if(isset($_SESSION['login-panel'])){
                 // Renderiza home do panel admin
                 \App\Views\MainView::render('panel');
                 \App\Models\AdminsModel::updateOnlineAdmin();
@@ -26,7 +23,7 @@
                     $login = new AdminsModel;
                     $user = $_POST['user'];
                     $password = $_POST['password'];
-                    $login->panelLoginUser($user,$password);
+                    $login->panelLogin($user,$password);
                 }
 
                 \App\Views\MainView::render('loginpanel');

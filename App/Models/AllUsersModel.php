@@ -41,7 +41,7 @@ class AllUsersModel{
         }
     }
 
-    public function getUsersByUser($user){
+    public static function getUsersByUser($user){
         $pdo = \App\MySql::connect();
         $catch = $pdo->prepare("SELECT * FROM users WHERE user = ?");
         $catch->execute(array($user));

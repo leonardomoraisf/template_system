@@ -2,7 +2,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Login no Painel Admin</title>
+    <title>Painel de controle</title>
     <link href="<?php echo INCLUDE_PATH_STATIC ?>styles/style_loginpanel.css" rel="stylesheet" >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -20,12 +20,10 @@
             <?php if(isset($_POST['error'])){ ?>
                 <p class="error"><?php echo $_POST['error'];?></p>
             <?php } ?>
-
-            <form method="post">
+            <span class="txt">Insira suas informações para entrar:</span>
+            <form class="form" method="post">
                 <input type="text" name="user" placeholder="Usuário">
                 <input type="password" name="password" placeholder="Senha">
-                <label >Lembrar-me</label>
-                <input type="checkbox" name="remind">
                 <input type="submit" name="action" value="Entrar">
                 <input type="hidden" name="login">
             </form>

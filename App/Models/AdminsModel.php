@@ -55,7 +55,7 @@ class AdminsModel{
         return $select->fetchAll();
     }
 
-    public function panelLoginUser($user,$password){
+    public function panelLogin($user,$password){
 
         if(empty($user) || empty($password)){
             $_POST['error'] = "Usuário ou senha incorretos!";
@@ -79,13 +79,14 @@ class AdminsModel{
                 if(\App\Bcrypt::check($password,$passwordData)){
                     if($position >= 2){
                         // Logado com sucesso
-                        $_SESSION['login'] = true;
+                        $_SESSION['login-panel'] = true;
                         $_SESSION['id'] = $data['id'];
                         $_SESSION['user'] = $user;
                         $_SESSION['password'] = $passwordData;
                         $_SESSION['name'] = $data['name'];
                         $_SESSION['position'] = $data['position'];
                         \App\Utilities::redirect(INCLUDE_PATH.'panel');
+                        die();
                     }else{
                         $_POST['error'] = "Você não tem permissão!";
                     }
@@ -117,7 +118,7 @@ class AdminsModel{
                 $password = \App\Bcrypt::hash($password);
                 $register = \App\MySql::connect()->prepare("INSERT INTO users VALUES (null,?,?,?,?)");
                 $register->execute(array($user,$password,$name,$position));
-                $_POST['error2'] = "Usuário cadastrado!";
+                $_POST['succsess'] = "Usuário cadastrado!";
             }
         }
     }
@@ -141,7 +142,7 @@ class AdminsModel{
                     $pdo = \App\MySql::connect();
                     $update = $pdo->prepare("UPDATE users SET password = ?, name = ?, position = ? WHERE user = ? ");
                     $update->execute(array($password,$name,$position,$user));
-                    $_POST['error2'] = "Usuário atualizado com sucesso!";
+                    $_POST['succsess'] = "Usuário atualizado com sucesso!";
                 }
             }else{
                 $_POST['error'] = "Este usuário não existe!";
@@ -150,5 +151,11 @@ class AdminsModel{
 
     }
 
+    public static function logoutPanel(){
+        session_unset();
+        session_destroy();
+
+        \App\Utilities::redirect(INCLUDE_PATH.'panel');
+    }
 
 }

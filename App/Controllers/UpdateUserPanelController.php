@@ -16,7 +16,7 @@ class UpdateUserPanelController{
             $update->updatePanelUser($user,$name,$password,$position);
         }
 
-        if(isset($_SESSION['login'])){
+        if(isset($_SESSION['login-panel'])){
             // Renderizar para criar conta
             \App\Views\MainView::render('updateuserpanel');
         }else{

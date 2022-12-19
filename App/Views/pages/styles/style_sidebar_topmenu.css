@@ -11,6 +11,23 @@ header{
     margin: 0 auto;
 }
 
+.top-menu-inicio{
+    float: left;
+}
+
+.top-menu-inicio a{
+    font-size: 20px;
+    margin-left: 20px;
+    display: block;
+    text-decoration: none;
+    color: #454545;
+}
+
+.top-menu-inicio a:hover{
+    font-weight: bold;
+    color: #454545;
+}
+
 .top-menu-btn{
     float:left;
     cursor: pointer;
@@ -31,7 +48,7 @@ header{
 
 .top-menu-logout i{
     font-size: 20px;
-    margin-left: 5px;
+    margin-left: 10px;
 }
 
 .top-menu-logout a:hover{
@@ -70,7 +87,6 @@ header{
 
 .menu-sidebar a{
     display: block;
-    margin-bottom: 15px;
     text-decoration: none;
     color: #454545;
 }
@@ -78,6 +94,21 @@ header{
 .menu-sidebar a:hover{
     font-weight: bold;
     color: #454545;
+}
+
+.box-div{
+    font-weight: bold;
+    border-bottom: 1px solid #939398;
+    width: fit-content;
+    margin-bottom: 5px;
+}
+
+.register{
+    margin-bottom: 5px;
+}
+
+.update{
+    margin-bottom: 15px;
 }
 
 .user-box{
