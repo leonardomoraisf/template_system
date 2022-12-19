@@ -1,7 +1,11 @@
 <link rel="stylesheet" href="<?php echo INCLUDE_PATH_STATIC ?>styles/panel.css">
 <link href="<?php echo INCLUDE_PATH_STATIC ?>icons/font_awesome/css/font-awesome.min.css" rel="stylesheet" >
 
-<?php $onlineAdmins = \App\Models\AdminsModel::listOnlineAdmins(); ?>
+<?php 
+$onlineUsers = \App\Models\UsersModel::listOnlineUsers(); 
+$allVisits = \App\Models\AllUsersModel::allVisits();
+$todayVisits = \App\Models\AllUsersModel::todayVisits();
+?>
 
 <div class="box-content w100">
 
@@ -11,22 +15,22 @@
 
         <div class="box-metrica-single">
             <div class="box-metrica-wrapper">
-                <h2>Admins Online</h2>
-                <p><?php echo count($onlineAdmins); ?></p>
+                <h2>Usuários Online</h2>
+                <p><?php echo count($onlineUsers); ?></p>
             </div>
         </div>
 
         <div class="box-metrica-single">
             <div class="box-metrica-wrapper">
                 <h2>Total de visitas</h2>
-                <p>100</p>
+                <p><?php echo $allVisits; ?></p>
             </div>
         </div>
 
         <div class="box-metrica-single">
             <div class="box-metrica-wrapper">
                 <h2>Visitas hoje</h2>
-                <p>3</p>
+                <p><?php echo $todayVisits; ?></p>
             </div>
         </div>
     <div class="clear"></div>

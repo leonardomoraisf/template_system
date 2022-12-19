@@ -17,7 +17,7 @@
 
     <div class="content">
 
-        <?php include('includes/admin_infos.php')?>
+        <?php include('includes/users_infos.php')?>
 
         <?php include('includes/online_admins.php') ?>
 

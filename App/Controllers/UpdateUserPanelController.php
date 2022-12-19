@@ -4,28 +4,23 @@ namespace App\Controllers;
 
 use App\Models\AdminsModel;
 
-class RegisterPanelController
-{
+class UpdateUserPanelController{
     public function index(){
-        
-        if(isset($_POST['register'])){
-            $register = new AdminsModel;
-            $name = $_POST['name'];
+
+        if(isset($_POST['update'])){
+            $update = new AdminsModel;
             $user = $_POST['user'];
+            $name = $_POST['name'];
             $password = $_POST['password'];
             $position = $_POST['position'];
-            $register->registerPanelUser($name, $user,$password,$position);
+            $update->updatePanelUser($user,$name,$password,$position);
         }
 
         if(isset($_SESSION['login'])){
             // Renderizar para criar conta
-            \App\Views\MainView::render('registerpanel');
+            \App\Views\MainView::render('updateuserpanel');
         }else{
             \App\Views\MainView::render('404');
          }
-
-    
     }
 }
-
-?>

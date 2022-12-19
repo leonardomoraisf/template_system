@@ -17,6 +17,10 @@
 
         <div class="form-login">
 
+            <?php if(isset($_POST['error'])){ ?>
+                <p class="error"><?php echo $_POST['error'];?></p>
+            <?php } ?>
+
             <form method="post">
                 <input type="text" name="user" placeholder="Usuário">
                 <input type="password" name="password" placeholder="Senha">

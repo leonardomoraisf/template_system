@@ -11,29 +11,29 @@ class AdminsModel{
     private $position;
 
     public static function updateOnlineAdmin(){
-        if(isset($_SESSION['online'])){
-            $token = $_SESSION['online'];
+        if(isset($_SESSION['online_panel'])){
+            $token = $_SESSION['online_panel'];
             $hour = date('Y-m-d H:i:s');
             $pdo = \App\MySql::connect();
             $check = $pdo->prepare("SELECT `id` FROM `online_admins` WHERE token = ?");
-            $check->execute(array($_SESSION['online']));
+            $check->execute(array($_SESSION['online_panel']));
             if($check->rowCount() == 1){
                 $update = $pdo->prepare("UPDATE `online_admins` SET last_action = ? WHERE token = ?");
                 $update->execute(array($hour,$token));
             }else{
                 $adminId = $_SESSION['id'];
                 $ip = $_SERVER['REMOTE_ADDR'];
-                $token = $_SESSION['online'];
+                $token = $_SESSION['online_panel'];
                 $hour = date('Y-m-d H:i:s');
                 $pdo =  \App\MySql::connect();
                 $insert = $pdo->prepare("INSERT INTO `online_admins` VALUES (null,?,?,?,?)");
                 $insert->execute(array($ip,$hour,$token,$adminId));
             }
         }else{
-            $_SESSION['online'] = uniqid();
+            $_SESSION['online_panel'] = uniqid();
             $adminId = $_SESSION['id'];
             $ip = $_SERVER['REMOTE_ADDR'];
-            $token = $_SESSION['online'];
+            $token = $_SESSION['online_panel'];
             $hour = date('Y-m-d H:i:s');
             $pdo =  \App\MySql::connect();
             $insert = $pdo->prepare("INSERT INTO `online_admins` VALUES (null,?,?,?,?)");
@@ -57,38 +57,97 @@ class AdminsModel{
 
     public function panelLoginUser($user,$password){
 
+        if(empty($user) || empty($password)){
+            $_POST['error'] = "Usuário ou senha incorretos!";
+        }
+
         $user = \App\Models\AllUsersModel::validateData($_POST['user']);
 
         // Verificar no banco de dados
         $verify = \App\MySql::connect()->prepare("SELECT * FROM users WHERE user = ?");
         $verify->execute(array($user));
 
-        if($verify->rowCount() == 0){
-            // Não existe o user
-            \App\Utilities::redirect(INCLUDE_PATH.'panel');
-        }else{
-            $data = $verify->fetch();
-            $user = $data['user'];
-            $passwordData = $data['password'];
-            $position = $data['position'];
-            if(\App\Bcrypt::check($password,$passwordData)){
-                if($position >= 1){
-                    // Logado com sucesso
-                    $_SESSION['login'] = true;
-                    $_SESSION['id'] = $data['id'];
-                    $_SESSION['user'] = $user;
-                    $_SESSION['password'] = $passwordData;
-                    $_SESSION['name'] = $data['name'];
-                    $_SESSION['position'] = $data['position'];
-                    \App\Utilities::redirect(INCLUDE_PATH.'panel');
+        if(!empty($user) && !empty($password)){
+            if($verify->rowCount() == 0){
+                // Não existe o user
+                $_POST['error'] = "Usuário ou senha incorretos!";
+            }else{
+                $data = $verify->fetch();
+                $user = $data['user'];
+                $passwordData = $data['password'];
+                $position = $data['position'];
+                if(\App\Bcrypt::check($password,$passwordData)){
+                    if($position >= 2){
+                        // Logado com sucesso
+                        $_SESSION['login'] = true;
+                        $_SESSION['id'] = $data['id'];
+                        $_SESSION['user'] = $user;
+                        $_SESSION['password'] = $passwordData;
+                        $_SESSION['name'] = $data['name'];
+                        $_SESSION['position'] = $data['position'];
+                        \App\Utilities::redirect(INCLUDE_PATH.'panel');
+                    }else{
+                        $_POST['error'] = "Você não tem permissão!";
+                    }
                 }else{
-                    \App\Utilities::redirect(INCLUDE_PATH.'panel');
+                    $_POST['error'] = "Usuário ou senha incorretos!";
+                }
+
+            }
+        }
+    }
+
+    public function registerPanelUser($name, $user, $password, $position){
+
+        $name = \App\Models\AllUsersModel::validateData($_POST['name']);
+        $user = \App\Models\AllUsersModel::validateData($_POST['user']); 
+
+        if(empty($name) || empty($user) || empty($password) || empty($position)){
+            $_POST['error'] = "Há campos não preenchidos!";
+        }
+        if(!empty($name) && !empty($user) && !empty($password) && !empty($position)){
+            if(\App\Models\AllUsersModel::userExists($user)){
+                $_POST['error'] = "Este usuário já existe!";
+            }else if(strlen($password) < 6){
+                $_POST['error'] = "A senha deve conter mais de 6 caracteres!";
+            }else if($position >= $_SESSION['position']){
+                $_POST['error'] = "Você não pode cadastrar contas com uma posição maior que a sua!";
+            }else{
+                // Registrar usuario
+                $password = \App\Bcrypt::hash($password);
+                $register = \App\MySql::connect()->prepare("INSERT INTO users VALUES (null,?,?,?,?)");
+                $register->execute(array($user,$password,$name,$position));
+                $_POST['error2'] = "Usuário cadastrado!";
+            }
+        }
+    }
+
+    public function updatePanelUser($user, $name, $password, $position){
+        
+        $name = \App\Models\AllUsersModel::validateData($_POST['name']);
+        
+        if(empty($user) || empty($name) || empty($password) || empty($position)){
+            $_POST['error'] = "Há campos não preenchidos!";
+        }
+        
+        if(!empty($name) && !empty($user) && !empty($password) && !empty($position)){
+            if(\App\Models\AllUsersModel::userExists($user)){
+                if(strlen($password) < 6){
+                    $_POST['error'] = "A senha deve conter mais de 6 caracteres!";
+                }else if($position >= $_SESSION['position']){
+                    $_POST['error'] = "Você não pode atualizar contas com uma posição maior que a sua!";
+                }else{
+                    $password = \App\Bcrypt::hash($password);
+                    $pdo = \App\MySql::connect();
+                    $update = $pdo->prepare("UPDATE users SET password = ?, name = ?, position = ? WHERE user = ? ");
+                    $update->execute(array($password,$name,$position,$user));
+                    $_POST['error2'] = "Usuário atualizado com sucesso!";
                 }
             }else{
-                \App\Utilities::redirect(INCLUDE_PATH.'panel');
+                $_POST['error'] = "Este usuário não existe!";
             }
-
         }
+
     }
 
 

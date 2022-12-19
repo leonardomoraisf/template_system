@@ -1,9 +1,11 @@
 <link rel="stylesheet" href="<?php echo INCLUDE_PATH_STATIC ?>styles/panel.css">
 <link href="<?php echo INCLUDE_PATH_STATIC ?>icons/font_awesome/css/font-awesome.min.css" rel="stylesheet">
 
+<?php $onlineAdmins = \App\Models\AdminsModel::listOnlineAdmins(); ?>
+
 <div class="box-content w100">
 
-    <h2> <i class="fa fa-rocket"></i>Admins online</h2>
+    <h2><i class="fa fa-rocket"></i>Admins online = <div class="box-count"><span><?php echo count($onlineAdmins); ?></span></div></h2>
 
     <div class="table-responsive">
 
@@ -29,8 +31,7 @@
 
         </div>
         <!--row-->
-        <?php $onlineAdmins = \App\Models\AdminsModel::listOnlineAdmins(); 
-        foreach ($onlineAdmins as $key => $value) { ?>
+        <?php foreach ($onlineAdmins as $key => $value) { ?>
             <div class="row">
 
                 <div class="col">

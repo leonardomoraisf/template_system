@@ -44,15 +44,6 @@ html,body{
     }
 }
 
-.box-content{
-    margin: 0 auto;
-    background: white;
-    padding: 30px;
-    margin-bottom: 25px;
-    border-radius: 0.375rem;
-    max-width: 575px;
-}
-
 .error{
     text-align: center;
     font-size: 13px;
@@ -71,9 +62,18 @@ html,body{
     margin-top: 15px;
 }
 
-.form-register{
-    padding: 15px;
+
+.box-content{
     margin: 0 auto;
+    background: white;
+    padding: 30px;
+    margin-bottom: 25px;
+    border-radius: 0.375rem;
+    max-width: 575px;
+}
+
+.txt{
+    font-weight: bold;
 }
 
 .form-register input[type=text],
@@ -86,7 +86,13 @@ html,body{
     border-radius: 10px;
 }
 
-.form-register input[type=text]{
+.form-register input[type=text]:nth-of-type(1){
+    margin-top: 10px;
+    margin-bottom: 37px;
+}
+
+.form-register input[type=text]:nth-of-type(2){
+    margin-top: 10px;
     margin-bottom: 17px;
 }
 

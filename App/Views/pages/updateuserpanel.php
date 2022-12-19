@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Registrar novo usuário</title>
-    <link href="<?php echo INCLUDE_PATH_STATIC ?>styles/style_registerpanel.css" rel="stylesheet" >
+    <link href="<?php echo INCLUDE_PATH_STATIC ?>styles/style_updateuserpanel.css" rel="stylesheet" >
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
@@ -25,23 +25,27 @@
                 <div class="form-register">
 
                     <form method="post">
-                        <input type="text" name="name" placeholder="Nome Completo">
-                        <input type="text" name="user" placeholder="Usuário">
-                        <label >Posição :</label>
+                        <span class="txt">Digite o usuário que deseja atualizar: </span>
+                        <input class="user" type="text" name="user" placeholder="Usuário">
+                        <span class="txt">Altere as informações: </span>
+                        <input class="name" type="text" name="name" placeholder="Nome Completo">
+                        <label >Mudar posição :</label>
                         <select name="position" >
-                        <option value=""></option>
+                            <option value=""></option>
                             <?php
                                 foreach (\App\Models\AllUsersModel::$positions as $key => $value) {
-                                    echo '<option value="'.$key.'">'.$value.'</option>';
+                                    echo '
+                                    <option value="'.$key.'">'.$value.'</option>
+                                    ';
                                 }
                             ?>
                         </select>
                         <input type="password" name="password" placeholder="Senha">
-                        <input type="submit" name="action" value="Criar nova conta">
+                        <input type="submit" name="action" value="Atualizar conta">
                         <?php if(isset($_POST['error2'])){ ?>
                             <p class="error2"><?php echo $_POST['error2'];?></p>
                         <?php } ?>
-                        <input type="hidden" name="register" value="register">
+                        <input type="hidden" name="update" value="update">
                     </form>
 
                 </div><!--form-register-->

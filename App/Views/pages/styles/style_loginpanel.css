@@ -20,6 +20,15 @@ body{
     background-color: #EAEAF4;
 }
 
+.error{
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.4;
+    font-weight: 600;
+    color: rgb(218, 86, 86);
+    margin-bottom: 15px;
+}
+
 .form-container-login{
     transform: translate(-50%,-50%);
     -ms-transform: translate(-50%,-50%);

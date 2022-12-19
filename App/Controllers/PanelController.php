@@ -27,7 +27,6 @@
                     $user = $_POST['user'];
                     $password = $_POST['password'];
                     $login->panelLoginUser($user,$password);
-                    \App\Models\AdminsModel::updateOnlineAdmin();
                 }
 
                 \App\Views\MainView::render('loginpanel');

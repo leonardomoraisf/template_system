@@ -21,7 +21,7 @@
                 </div><!--user-box-->
                 <a href="<?php echo INCLUDE_PATH.'panel'?>">Início</a>
                 <a href="<?php echo INCLUDE_PATH.'registerpanel'?>">Registrar novo usuário</a>
-                
+                <a href="<?php echo INCLUDE_PATH.'updateuserpanel'?>">Atualizar usuário</a>
             </div>
 
         </div><!--sidebar-wrapper-->

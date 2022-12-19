@@ -19,9 +19,9 @@ class AllUsersModel{
     }
 
     public static $positions = [
-        '0' => 'Usuário',
-        '1' => 'Gestor',
-        '2' => 'Administrador',
+        '1' => 'Usuário',
+        '2' => 'Gestor',
+        '3' => 'Administrador',
     ];
 
     public static function catchPosition($position){
@@ -61,7 +61,7 @@ class AllUsersModel{
         $update->execute(array($user,$password,$name,$position));
     }
 
-    public function userExists($user){
+    public static function userExists($user){
         $pdo = \App\MySql::connect();
         $verify = $pdo->prepare("SELECT user FROM users WHERE user = ?");
         $verify->execute(array($user));
@@ -74,37 +74,30 @@ class AllUsersModel{
         }
     }
 
-    
-    public function registerUser($name, $user, $password, $position){
-
-        $name = self::validateData($_POST['name']);
-        $user = self::validateData($_POST['user']);
-
-        if($name == null){
-            \App\Utilities::alert('Nome inválido.');
-            \App\Utilities::redirect(INCLUDE_PATH.'registerpanel');
-        }else if($user == null){
-            \App\Utilities::alert('Usuário inválido.');
-        }else if(self::userExists($user)){
-            \App\Utilities::alert('Este usuário já existe!');
-            \App\Utilities::redirect(INCLUDE_PATH.'registerpanel');
-        }else if($password == null){
-            \App\Utilities::alert('Senha inválida!');
-            \App\Utilities::redirect(INCLUDE_PATH.'registerpanel');
-        }else if(strlen($password) < 6){
-            \App\Utilities::alert('A senha deve conter mais de 6 caracteres!');
-            \App\Utilities::redirect(INCLUDE_PATH.'registerpanel');
-        }else if($position == null){
-            \App\Utilities::alert('Escolha uma posição!');
-            \App\Utilities::redirect(INCLUDE_PATH.'registerpanel');
-        }else{
-            // Registrar usuario
-            $password = \App\Bcrypt::hash($password);
-            $register= \App\MySql::connect()->prepare("INSERT INTO users VALUES (null,?,?,?,?)");
-            $register->execute(array($user,$password,$name,$position));
-            \App\Utilities::alert('Usuário cadastrado!');
-            \App\Views\MainView::render('registerpanel');
+    public static function visitCounter(){
+        if(!isset($_COOKIE['visit'])){
+            setcookie('visit','True',time() + (60*60*24*7));
+            $date = date('Y-m-d');
+            $pdo = \App\MySql::connect();
+            $create = $pdo->prepare("INSERT INTO `user_visits` VALUES (null,?)");
+            $create->execute(array($date));
         }
     }
+    
+    public static function allVisits(){
+        $pdo = \App\MySql::connect();
+        $catch = $pdo->prepare("SELECT * FROM `user_visits`");
+        $catch->execute();
+        return $catch->rowCount();
+    }
+
+    public static function todayVisits(){
+        $date = date('Y-m-d');
+        $pdo = \App\MySql::connect();
+        $catch = $pdo->prepare("SELECT * FROM `user_visits` WHERE date = ?");
+        $catch->execute(array($date));
+        return $catch->rowCount();
+    }
+
 
 }
