@@ -4,7 +4,6 @@ Estruturado em MVC.
 Funções:
 <br/>
 All:
-<br/>
 - Validação de dados
 - Login seguro com posições
 - Pegar posição
@@ -14,7 +13,6 @@ All:
 - Validação de existência de usuário
 <br/>
 Usuários:
-<br/>
 - Contador de visitas ao site
 - Contador de visitas totais
 - Contador de visitas diárias
@@ -22,7 +20,6 @@ Usuários:
 - Listar usuários online
 <br/>
 Admins:
-<br/>
 - Contador de admins online
 - Listar admins online
 - Login no painel de controle com segurança por posição
@@ -31,5 +28,4 @@ Admins:
 - Logout
 <br/>
 Depoimentos:
-<br/>
 - Insert de depoimentos dinâmico
